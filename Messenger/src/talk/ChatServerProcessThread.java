@@ -1,4 +1,4 @@
-package Chat_copy;
+package talk;
 
 import java.io.BufferedReader;
 import java.io.IOException;

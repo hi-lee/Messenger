@@ -1,12 +1,12 @@
-package Chat_copy;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DB {
 	public static void main(String[] args) {
-
-		String url = "jdbc:sqlserver://211.224.106.165,3678; database=UWAY;integratedSecurity=true";
+//		211.224.106.165,3678
+		String url = "jdbc:sqlserver://211.224.106.165:3678;DatabaseName=UWAY";
 		String user = "sa";
 		String password = "stadmin";
 
@@ -22,7 +22,7 @@ public class DB {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			System.out.println("error : " + e);
 		}
 	}
 }

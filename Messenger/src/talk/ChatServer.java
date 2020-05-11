@@ -1,4 +1,4 @@
-package Chat_copy;
+package talk;
 
 import java.io.IOException;
 import java.io.PrintWriter;
