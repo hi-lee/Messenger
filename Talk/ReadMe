@@ -1,0 +1,16 @@
+* How to Start JavaFX fro GUI development
+  - JavaFx splits Model, View, Controller
+  - view: FXML, model: collection of JavaFx Attribute, Controller: Using DI to use UI Component
+  
+1. Use JavaFx in Eclipse
+  - download e(fx)clipse Flugin
+   1) Help > Install New Softward
+   2) Work with: http://download.eclipse.org/efxclipse/updates-released/2.4.0/site
+   3) check e(fx)clipse - install
+   4) download JavaFX Scene Builder 2.0 (http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html)
+   5) Window > Preferences > General > Editors - File Associations
+      Associated editors: Add - External programs - Browse - Scene Builder.exe
+      (C:\Program Files (x86)\Oracle\JavaFX Scene Builder 2.0)
+
+
+
