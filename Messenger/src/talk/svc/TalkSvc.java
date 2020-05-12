@@ -1,8 +1,14 @@
-package multi_network;
+package talk.svc;
 
-import static db.Jdbc.*;
+import static db.Jdbc.close;
+import static db.Jdbc.commit;
+import static db.Jdbc.getConnection;
+import static db.Jdbc.rollback;
 
 import java.sql.Connection;
+
+import talk.dao.TalkDAO;
+import talk.vo.Talk;
 
 public class TalkSvc {
 
@@ -22,8 +28,6 @@ public class TalkSvc {
 			rollback(con);
 		}
 		close(con);
-		
-		System.out.println("id : " + talk.getUserId());
 		
 		return insertResult;
 	}

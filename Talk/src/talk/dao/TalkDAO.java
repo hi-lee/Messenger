@@ -1,8 +1,11 @@
-package multi_network;
+package talk.dao;
+
+import static db.Jdbc.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import static db.Jdbc.*;
+
+import talk.vo.Talk;
 
 
 public class TalkDAO {
@@ -17,7 +20,7 @@ public class TalkDAO {
 		return talkDAO;
 	}
 
-	public void setConnection(Connection con2) {
+	public void setConnection(Connection con) {
 		// TODO Auto-generated method stub
 		this.con = con;
 	}
@@ -28,10 +31,9 @@ public class TalkDAO {
 		int insertCount = 0;
 		
 		try {
-			pstmt = con.prepareStatement("INSERT INTO eval_talk VALUES(?,?,?)");
+			pstmt = con.prepareStatement("INSERT INTO eval_talk(userid, body) VALUES(?,?)");
 			pstmt.setString(1, talk.getUserId());
 			pstmt.setString(2, talk.getBody());
-			pstmt.setString(3, talk.getDate());
 			insertCount = pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception

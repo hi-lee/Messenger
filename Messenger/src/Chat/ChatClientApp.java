@@ -1,4 +1,4 @@
-package talk;
+package Chat;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -8,8 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ChatClientApp {
-//	192.168.10.135
-	private static final String SERVER_IP = "172.30.1.35";
+//	192.168.10.135 172.30.1.35
+	private static final String SERVER_IP = "192.168.10.135";
 	private static final int SERVER_PORT = 5004;
 
 	public static void main(String[] args) {

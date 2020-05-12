@@ -3,7 +3,7 @@ package multi_network;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
+//192.168.10.135
 public class MultiServer {
 	private ArrayList<MultiServerThread> list;
 	private Socket socket;
@@ -13,6 +13,7 @@ public class MultiServer {
 		ServerSocket serverSocket = new ServerSocket(5000);
 		MultiServerThread mst = null;
 		boolean isStop = false;
+		
 		while (!isStop) {
 			System.out.println("Server ready...");
 			socket = serverSocket.accept();

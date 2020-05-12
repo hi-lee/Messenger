@@ -9,24 +9,26 @@ import javax.swing.JProgressBar;
 
 public class MultiClient implements ActionListener {
 	private Socket socket;
-	private ObjectInputStream ois;
-	private ObjectOutputStream oos;
-	private JFrame jframe, login1;
+	private ObjectInputStream ois;	//입력
+	private ObjectOutputStream oos;	//출력
+	private JFrame jframe, login1;	//윈도우창, 로그인창
 	private JTextField jtf, idc, pass;
 	private JTextArea jta, jlo;
 	private JLabel jlb1, jlb2, jID, jPW;
 	private JPanel jp1, jp2, jp3, jp4;
-	private String ip;
 	private String id;
+	private String ip = "ip content";
 	private JButton jbtn, jbtn1, jexit;
 	public boolean changepower = false;
 	public boolean saypower = false;
 	private boolean login = false;
 
 	public MultiClient() {
-		/*
-		 * ip = argIp; id = argId;
-		 */
+		
+//		ip = argIp; 
+//		id = argId;
+//		System.out.println("ip : " + ip);
+		 
 		jframe = new JFrame("Multi Chatting");
 		login1 = new JFrame("Login");
 		JProgressBar progressBar = new JProgressBar();
@@ -35,7 +37,7 @@ public class MultiClient implements ActionListener {
 		progressBar.setBounds(32, 303, 195, 14);
 
 		jtf = new JTextField(20);
-		idc = new JPasswordField(20);
+		idc = new JTextField(20);
 		pass = new JTextField(20);
 
 		jta = new JTextArea(43, 43) {
@@ -57,7 +59,7 @@ public class MultiClient implements ActionListener {
 		};
 		jID = new JLabel("IP");
 		jPW = new JLabel("name");
-		jbtn = new JButton("Enter");
+		jbtn = new JButton("EXIT");
 		jbtn1 = new JButton("Login");
 		jexit = new JButton("exit");
 		jp1 = new JPanel();
@@ -172,11 +174,13 @@ public class MultiClient implements ActionListener {
 		if (str.equals("exit")) {
 			System.exit(0);
 		}
-
+		
+		
+/*
 		if (obj == jtf && changepower == true) {
 			changepower = false;
 			if (msg == null || msg.length() == 0) {
-				JOptionPane.showMessageDialog(jframe, "����������", "���", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(jframe, "changepower", "warning", JOptionPane.WARNING_MESSAGE);
 			} else {
 				id = jtf.getText();
 				jtf.setText("");
@@ -184,16 +188,19 @@ public class MultiClient implements ActionListener {
 		} else if (obj == jtf && saypower == true) {
 			saypower = false;
 			if (msg == null || msg.length() == 0) {
-				JOptionPane.showMessageDialog(jframe, "����������", "���", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(jframe, "saypower", "warning", JOptionPane.WARNING_MESSAGE);
 			} else {
 				id = jtf.getText();
 				jtf.setText("");
 			}
 		}
-
-		if (obj == jtf) {
+*/
+		
+		
+		if (obj == jtf) { // 엔터 친 경우
+//			텍스트필드에 입력하지 않은 경우 경고창
 			if (msg == null || msg.length() == 0) {
-				JOptionPane.showMessageDialog(jframe, "����������", "���", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(jframe, "값을 입력하세요", "warning", JOptionPane.WARNING_MESSAGE);
 			} else {
 				try {
 					oos.writeObject(id + "#" + msg);
@@ -202,11 +209,11 @@ public class MultiClient implements ActionListener {
 				}
 				jtf.setText("");
 			}
-		} else if (obj == jbtn) {
+		} else if (obj == jbtn) { 	// 종료버튼 클릭한 경우
 			try {
 				oos.writeObject(id + "#exit");
-			} catch (IOException ee) {
-				ee.printStackTrace();
+			} catch (IOException f) {
+				f.printStackTrace();
 			}
 			System.exit(0);
 		}
@@ -216,9 +223,12 @@ public class MultiClient implements ActionListener {
 		System.exit(0);
 	}
 
+	
+//	서버와 송수신을 위해 소켓 객체와 연결하여 Stream 발생
 	public void init() throws IOException {
-		socket = new Socket("172.30.1.35", 5000);
+		socket = new Socket("192.168.10.135", 5000);
 		System.out.println("connected...");
+//		입출력 스트림 생성
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		ois = new ObjectInputStream(socket.getInputStream());
 		MultiClientThread ct = new MultiClientThread(this);
