@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
- 
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -25,18 +25,26 @@ public class Main extends Application  {
      * 서버폭증에 대비할 수 있다.
      */
     public static ExecutorService threadPool;
+//    public static final String IP = "211.224.106.165";
+//    public static final int PORT = 2980;
  
     /* 접속한 클라이언트들을 관리한다 -> 일종의 배열 */
     public static Vector<client> clients = new Vector<client>();
     ServerSocket serverSocket;
  
     /* 서버를 구동시켜서 클라이언트의 연결을 기다리는 메소드 */
-    public void startServer(String IP, int port) {
+    public void startServer(String IP, int PORT) {
+    	IP = "211.224.106.165";
+    	PORT = 2980;
+    	
         try {
             serverSocket = new ServerSocket();
             /* 특정 클라이언트의 접속을 기다린다 */
-            serverSocket.bind(new InetSocketAddress(IP, port));
+            serverSocket.bind(new InetSocketAddress("211.224.106.165", 2980));
+            
         } catch (Exception e) {// 오류 발생
+//        	System.out.println("[ 서버 연결 오류 ] : " + e);
+        	e.printStackTrace();
             if (!serverSocket.isClosed()) {// serverSocket이 닫혀 있는 상황이 아니라면
                 stopServer();
             }
@@ -48,6 +56,7 @@ public class Main extends Application  {
             public void run() {
                 while (true) {
                     try {
+                    	System.out.println("[클라이언트 연결 대기중]");
                         Socket socket = serverSocket.accept();// 클라이언트의 접속을 기다린다.
                         clients.add(new client(socket));
                         System.out.println("[클라이언트 접속]" + socket.getRemoteSocketAddress() + ":"
@@ -106,21 +115,22 @@ public class Main extends Application  {
         BorderPane.setMargin(toggleButton, new Insets(1,0,0,0));
         root.setBottom(toggleButton);
         
-        String IP ="192.168.10.135";
-        int port = 2980;
+        String IP ="211.224.106.165";
+        int PORT = 2980;
         
         toggleButton.setOnAction(event->{
             if(toggleButton.getText().equals("시작하기")) {
-                startServer(IP, port);
+                startServer(IP, PORT);
+//            	startServer();
                 Platform.runLater(()->{
-                    String message = String.format("[서버 시작]\n",IP,port);
+                    String message = String.format("[서버 시작]\n",IP,PORT);
                     textArea.appendText(message);
                     toggleButton.setText("종료하기");
                 });
             }else {
                 stopServer();
                 Platform.runLater(()->{
-                    String message = String.format("[서버 종료]\n",IP,port);
+                    String message = String.format("[서버 종료]\n",IP,PORT);
                     textArea.appendText(message);
                     toggleButton.setText("시작하기");
                 });

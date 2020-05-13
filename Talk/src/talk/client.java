@@ -11,11 +11,14 @@ import talk.vo.Talk;
 public class client {
 	Socket socket; // 컴퓨터와 네트워크 통신을 위함
 
+	
 	public client(Socket socket) {// 생성자
 		this.socket = socket;
 		receive();
 	}// client()
 
+	
+	
 	/* 클라이언트로부터 메세지를 전달받는 메소드 */
 	public void receive() {
 		Runnable thread = new Runnable() {// 스레드 생성

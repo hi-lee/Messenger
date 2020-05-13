@@ -1,10 +1,11 @@
 package talk;
-
+//211.224.106.165,2980
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
- 
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -18,21 +19,28 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
  
 public class MainClient extends Application {
+	
     Socket socket;
     TextArea textArea;
- 
+//    public static final String IP = "211.224.106.165";
+//    public static final int PORT = 2980;
+    
     // 클라이언트 동작 메소드
-    public void startClient(String IP, int port) {
+    public void startClient(String IP, int PORT) {
+    	IP = "211.224.106.165"; PORT = 2980;
         Thread thread = new Thread() {
             public void run() {
                 try {
-                    socket = new Socket(IP, port);
-                    receive();
+                    socket = new Socket();
+                    System.out.println("[ 클라이언트 연결 요청 ]");
+                    socket.connect(new InetSocketAddress("211.224.106.165", 2980));
+//                    receive();
+                    System.out.println("[연결 성공 ] ");
                 } catch (Exception e) {
                     // TODO: handle exception
                     if (!socket.isClosed()) {    
                         stopClient();
-                        System.out.println("[서버 접속 실패]");
+                        System.out.println("[ 서버 접속 실패 ] : " + e);
                         Platform.exit();// 프로그램 종료
                     }
                 }
@@ -105,7 +113,7 @@ public class MainClient extends Application {
         userName.setPromptText("닉네임을 입력하세요");
         HBox.setHgrow(userName, Priority.ALWAYS);
  
-        TextField IPText = new TextField("192.168.10.135");
+        TextField IPText = new TextField("211.224.106.165");
         TextField portText = new TextField("2980");
         portText.setPrefWidth(80);
         IPText.setPrefWidth(150);// 픽셀단위
