@@ -1,4 +1,4 @@
-* How to Start JavaFX fro GUI development
+* How to Start JavaFX for GUI development
   - JavaFx splits Model, View, Controller
   - view: FXML, model: collection of JavaFx Attribute, Controller: Using DI to use UI Component
   
